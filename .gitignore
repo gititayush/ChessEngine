@@ -1,0 +1,21 @@
+# Build
+/build/
+
+# Executables
+*.exe
+
+# Object Files
+*.o
+*.obj
+
+# VS Code
+.vscode/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Debug
+*.pdb

@@ -1,10 +1,14 @@
-#include <iostream>
+#include "Board.h"
 
 int main()
 {
-    std::cout << "========================================\n";
-    std::cout << "      AYU CHESS ENGINE v0.0.1\n";
-    std::cout << "========================================\n";
+    Board board;
+
+    board.LoadFEN(
+        "8/8/8/8/8/8/8/8 w - - 0 1"
+    );
+
+    board.Print();
 
     return 0;
 }
