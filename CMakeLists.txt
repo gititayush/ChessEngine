@@ -16,6 +16,7 @@ add_executable(
     src/Evaluation.cpp
     src/UCI.cpp
     src/MoveList.cpp
+    src/MoveGenerator.cpp
 )
 
 target_include_directories(

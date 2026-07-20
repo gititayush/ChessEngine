@@ -1,39 +1,48 @@
-#include "MoveList.h"
+#include <iostream>
+
+#include "AttackTables.h"
+#include "Board.h"
 
 int main()
 {
-    MoveList list;
+    AttackTables::Initialize();
 
-    list.Add(
-        MoveEncoding::Encode(
-            E2,
-            E4,
-            WP,
-            NO_PIECE,
-            false,
-            true,
-            false,
-            false
-        )
+    Board board;
+
+    board.LoadFEN(
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     );
 
-    list.Add(
-        MoveEncoding::Encode(
-            G1,
-            F3,
-            WN
-        )
-    );
+    while(true)
+    {
+        board.Print();
 
-    list.Add(
-        MoveEncoding::Encode(
-            B1,
-            C3,
-            WN
-        )
-    );
+        std::string input;
 
-    list.Print();
+        std::cout << "\nEnter Move (e2e4): ";
+
+        std::cin >> input;
+
+        if(input == "quit")
+            break;
+
+        Move move = board.ParseMove(input);
+
+        if(move == 0)
+        {
+            std::cout << "\nInvalid Move\n\n";
+            continue;
+        }
+
+        if(MoveGenerator::IsMoveLegal(board, move))
+{
+    board.MakeMove(move);
+}
+else
+{
+    std::cout << "\nIllegal Move!\n";
+}
+    }
 
     return 0;
 }

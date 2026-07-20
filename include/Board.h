@@ -4,6 +4,8 @@
 
 #include "Types.h"
 
+#include "Move.h"
+
 class Board
 {
 public:
@@ -37,6 +39,10 @@ public:
     void Reset();
 
     bool LoadFEN(const std::string& fen);
+
+    bool MakeMove(Move move);
+
+    Move ParseMove(const std::string& moveText) const;
 
     void Print() const;
 };

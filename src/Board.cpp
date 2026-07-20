@@ -128,6 +128,91 @@ bool Board::LoadFEN(const std::string& fen)
     return true;
 }
 
+bool Board::MakeMove(Move move)
+{
+    Square from = MoveEncoding::From(move);
+    Square to   = MoveEncoding::To(move);
+
+    Piece piece = MoveEncoding::PieceMoved(move);
+
+    Piece captured = pieceOnSquare[to];
+
+    bitboards[piece] &= ~(1ULL << from);
+
+    bitboards[piece] |= (1ULL << to);
+
+    pieceOnSquare[from] = NO_PIECE;
+
+    pieceOnSquare[to] = piece;
+
+    if(captured != NO_PIECE)
+    {
+        bitboards[captured] &= ~(1ULL << to);
+    }
+
+    occupancies[WHITE] = 0ULL;
+    occupancies[BLACK] = 0ULL;
+
+    for(int p = WP; p <= WK; p++)
+        occupancies[WHITE] |= bitboards[p];
+
+    for(int p = BP; p <= BK; p++)
+        occupancies[BLACK] |= bitboards[p];
+
+    occupancies[BOTH] =
+        occupancies[WHITE] |
+        occupancies[BLACK];
+
+    side =
+        side == WHITE ?
+        BLACK :
+        WHITE;
+
+    return true;
+}
+
+Move Board::ParseMove(const std::string& moveText) const
+{
+    if(moveText.length() != 4)
+        return 0;
+
+    int fromFile = moveText[0] - 'a';
+    int fromRank = moveText[1] - '1';
+
+    int toFile = moveText[2] - 'a';
+    int toRank = moveText[3] - '1';
+
+    if(fromFile < 0 || fromFile > 7 ||
+       toFile < 0 || toFile > 7 ||
+       fromRank < 0 || fromRank > 7 ||
+       toRank < 0 || toRank > 7)
+    {
+        return 0;
+    }
+
+    Square from =
+        (Square)(fromRank * 8 + fromFile);
+
+    Square to =
+        (Square)(toRank * 8 + toFile);
+
+    Piece piece = pieceOnSquare[from];
+
+    if(piece == NO_PIECE)
+        return 0;
+
+    bool capture =
+        pieceOnSquare[to] != NO_PIECE;
+
+    return MoveEncoding::Encode(
+        from,
+        to,
+        piece,
+        NO_PIECE,
+        capture
+    );
+}
+
 void Board::Print() const
 {
     const char pieceChar[] =
