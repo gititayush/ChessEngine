@@ -1,14 +1,39 @@
-#include "Board.h"
+#include "MoveList.h"
 
 int main()
 {
-    Board board;
+    MoveList list;
 
-    board.LoadFEN(
-        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    list.Add(
+        MoveEncoding::Encode(
+            E2,
+            E4,
+            WP,
+            NO_PIECE,
+            false,
+            true,
+            false,
+            false
+        )
     );
 
-    board.Print();
+    list.Add(
+        MoveEncoding::Encode(
+            G1,
+            F3,
+            WN
+        )
+    );
+
+    list.Add(
+        MoveEncoding::Encode(
+            B1,
+            C3,
+            WN
+        )
+    );
+
+    list.Print();
 
     return 0;
 }

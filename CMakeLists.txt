@@ -15,6 +15,7 @@ add_executable(
     src/Search.cpp
     src/Evaluation.cpp
     src/UCI.cpp
+    src/MoveList.cpp
 )
 
 target_include_directories(

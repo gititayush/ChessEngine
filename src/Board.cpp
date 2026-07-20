@@ -189,3 +189,4 @@ void Board::Print() const
     std::cout << "Fullmove: "
               << fullmoveNumber
               << "\n\n";
+}
