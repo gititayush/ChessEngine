@@ -5,7 +5,7 @@ int main()
     Board board;
 
     board.LoadFEN(
-        "8/8/8/8/8/8/8/8 w - - 0 1"
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     );
 
     board.Print();
