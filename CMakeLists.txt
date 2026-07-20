@@ -17,6 +17,7 @@ add_executable(
     src/UCI.cpp
     src/MoveList.cpp
     src/MoveGenerator.cpp
+    src/AttackDetector.cpp
 )
 
 target_include_directories(

@@ -2,6 +2,8 @@
 
 #include "AttackTables.h"
 #include "Board.h"
+#include "MoveGenerator.h"
+#include "AttackDetector.h"
 
 int main()
 {
@@ -9,10 +11,16 @@ int main()
 
     Board board;
 
-    board.LoadFEN(
-        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    );
-
+board.LoadFEN(
+    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+);
+std::cout
+    << AttackDetector::IsSquareAttacked(
+           board,
+           E4,
+           BLACK
+       )
+    << std::endl;
     while(true)
     {
         board.Print();
@@ -34,14 +42,7 @@ int main()
             continue;
         }
 
-        if(MoveGenerator::IsMoveLegal(board, move))
-{
-    board.MakeMove(move);
-}
-else
-{
-    std::cout << "\nIllegal Move!\n";
-}
+        board.MakeMove(move);
     }
 
     return 0;

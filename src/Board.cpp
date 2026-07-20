@@ -1,5 +1,5 @@
 #include "Board.h"
-
+#include "MoveGenerator.h"
 #include <iostream>
 #include <sstream>
 
@@ -190,29 +190,25 @@ Move Board::ParseMove(const std::string& moveText) const
         return 0;
     }
 
-    Square from =
-        (Square)(fromRank * 8 + fromFile);
+    Square from = (Square)(fromRank * 8 + fromFile);
+    Square to   = (Square)(toRank * 8 + toFile);
 
-    Square to =
-        (Square)(toRank * 8 + toFile);
+    MoveList list;
+    MoveGenerator::Generate(*this, list);
 
-    Piece piece = pieceOnSquare[from];
+    for(int i = 0; i < list.count; i++)
+    {
+        Move move = list.moves[i];
 
-    if(piece == NO_PIECE)
-        return 0;
+        if(MoveEncoding::From(move) == from &&
+           MoveEncoding::To(move) == to)
+        {
+            return move;
+        }
+    }
 
-    bool capture =
-        pieceOnSquare[to] != NO_PIECE;
-
-    return MoveEncoding::Encode(
-        from,
-        to,
-        piece,
-        NO_PIECE,
-        capture
-    );
+    return 0;
 }
-
 void Board::Print() const
 {
     const char pieceChar[] =
