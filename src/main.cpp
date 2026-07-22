@@ -1,49 +1,43 @@
-#include <iostream>
+#include <windows.h>
 
 #include "AttackTables.h"
 #include "Board.h"
-#include "MoveGenerator.h"
-#include "AttackDetector.h"
+#include "Perft.h"
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
     AttackTables::Initialize();
 
     Board board;
 
-board.LoadFEN(
-    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-);
-std::cout
-    << AttackDetector::IsSquareAttacked(
-           board,
-           E4,
-           BLACK
-       )
-    << std::endl;
+    board.LoadFEN(
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+
+    Perft::Divide(board, 6);
+
+    /*
     while(true)
     {
         board.Print();
 
-        std::string input;
+        std::string moveText;
+        std::cin >> moveText;
 
-        std::cout << "\nEnter Move (e2e4): ";
-
-        std::cin >> input;
-
-        if(input == "quit")
-            break;
-
-        Move move = board.ParseMove(input);
+        Move move = board.ParseMove(moveText);
 
         if(move == 0)
         {
-            std::cout << "\nInvalid Move\n\n";
+            std::cout << "Invalid move!\n";
             continue;
         }
 
-        board.MakeMove(move);
+        UndoInfo undo;
+        board.MakeMove(move, undo);
     }
+    */
 
     return 0;
 }

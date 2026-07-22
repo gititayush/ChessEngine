@@ -1,5 +1,5 @@
 #include "Move.h"
-
+#include <string>
 #include <iostream>
 
 namespace MoveEncoding
@@ -79,6 +79,18 @@ bool IsCastling(Move move)
 {
     return move & (1 << 23);
 }
+
+
+std::string SquareToString(Square square)
+{
+    std::string s = "a1";
+
+    s[0] = 'a' + (square % 8);
+    s[1] = '1' + (square / 8);
+
+    return s;
+}
+
 
 void Print(Move move)
 {

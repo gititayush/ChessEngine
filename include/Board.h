@@ -6,6 +6,21 @@
 
 #include "Move.h"
 
+struct UndoInfo
+{
+    Piece movedPiece;
+    Piece capturedPiece;
+
+    Square capturedSquare;
+
+    int castling;
+
+    Square enPassant;
+
+    int halfmoveClock;
+
+    int fullmoveNumber;
+};
 class Board
 {
 public:
@@ -40,8 +55,14 @@ public:
 
     bool LoadFEN(const std::string& fen);
 
-    bool MakeMove(Move move);
+    bool MakeMove(Move move, UndoInfo& undo);
 
+    Square FindKing(Side side) const;
+
+
+    void UndoMove(Move move, const UndoInfo& undo);
+
+    
     Move ParseMove(const std::string& moveText) const;
 
     void Print() const;

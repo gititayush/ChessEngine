@@ -18,6 +18,7 @@ add_executable(
     src/MoveList.cpp
     src/MoveGenerator.cpp
     src/AttackDetector.cpp
+    src/Perft.cpp
 )
 
 target_include_directories(

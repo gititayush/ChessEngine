@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.h"
+#include <string>
 
 using Move = U32;
 
@@ -32,6 +33,9 @@ namespace MoveEncoding
     bool IsEnPassant(Move move);
 
     bool IsCastling(Move move);
+
+    // ADD THIS
+    std::string SquareToString(Square square);
 
     void Print(Move move);
 }
