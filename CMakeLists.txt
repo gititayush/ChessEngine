@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(ChessEngine)
+project(KnightShift)
 
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
-    ChessEngine
+    KnightShift
     src/main.cpp
     src/Bitboard.cpp
     src/AttackTables.cpp
@@ -22,7 +22,7 @@ add_executable(
 )
 
 target_include_directories(
-    ChessEngine
+    KnightShift
     PRIVATE
     include
 )

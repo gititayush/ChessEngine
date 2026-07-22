@@ -16,7 +16,7 @@ int main()
     board.LoadFEN(
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 
-    Perft::Divide(board, 6);
+    Perft::Divide(board, 7);
 
     /*
     while(true)
