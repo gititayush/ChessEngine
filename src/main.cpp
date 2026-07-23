@@ -1,8 +1,10 @@
 #include <windows.h>
+#include <iostream>
 
 #include "AttackTables.h"
 #include "Board.h"
-#include "Perft.h"
+#include "Search.h"
+#include "Move.h"
 
 int main()
 {
@@ -14,30 +16,15 @@ int main()
     Board board;
 
     board.LoadFEN(
-        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+        "8/8/8/8/4q3/8/4Q3/4K3 w - - 0 1");
 
-    Perft::Divide(board, 7);
+    board.Print();
 
-    /*
-    while(true)
-    {
-        board.Print();
+    Move bestMove = Search::FindBestMove(board, 3);
 
-        std::string moveText;
-        std::cin >> moveText;
-
-        Move move = board.ParseMove(moveText);
-
-        if(move == 0)
-        {
-            std::cout << "Invalid move!\n";
-            continue;
-        }
-
-        UndoInfo undo;
-        board.MakeMove(move, undo);
-    }
-    */
+    std::cout << "\n\nBest Move: ";
+    MoveEncoding::Print(bestMove);
+    std::cout << '\n';
 
     return 0;
 }

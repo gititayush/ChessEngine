@@ -1,5 +1,5 @@
 #include "Bitboard.h"
-
+#include <bit>
 #include <iostream>
 
 namespace Bitboard
@@ -28,4 +28,10 @@ void Print(U64 board)
 
     std::cout << "\n   A B C D E F G H\n\n";
 }
+
+int CountBits(U64 board)
+{
+    return std::popcount(board);
+}
+
 }
