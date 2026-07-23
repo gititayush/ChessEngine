@@ -537,19 +537,19 @@ if(moveText.length() == 5)
 }
 void Board::Print() const
 {
-    const char* pieceSymbol[] =
+const char pieceChar[] =
 {
-    "♙", "♘", "♗", "♖", "♕", "♔",
-    "♟", "♞", "♝", "♜", "♛", "♚"
+    'P','N','B','R','Q','K',
+    'p','n','b','r','q','k'
 };
 
-const char* RESET = "\033[0m";
+// const char* RESET = "\033[0m";
 
-const char* WHITE_PIECE = "\033[1;97m"; // bright white
-const char* BLACK_PIECE = "\033[1;30m"; // black
+// const char* WHITE_PIECE = "\033[1;97m"; // bright white
+// const char* BLACK_PIECE = "\033[1;30m"; // black
 
-const char* LIGHT_SQUARE = "\033[48;5;255m"; // almost white
-const char* DARK_SQUARE  = "\033[48;5;238m"; // dark gray
+// const char* LIGHT_SQUARE = "\033[48;5;255m"; // almost white
+// const char* DARK_SQUARE  = "\033[48;5;238m"; // dark gray
 
     std::cout << '\n';
 
@@ -561,30 +561,19 @@ const char* DARK_SQUARE  = "\033[48;5;238m"; // dark gray
         {
             int square = rank * 8 + file;
 
-            bool lightSquare =
-    (rank + file) % 2 == 0;
+            // bool lightSquare =
+//     (rank + file) % 2 == 0;
 
-std::cout << (lightSquare ? LIGHT_SQUARE : DARK_SQUARE);
-
+// std::cout << (lightSquare ? LIGHT_SQUARE : DARK_SQUARE);
 if(pieceOnSquare[square] == NO_PIECE)
 {
-    std::cout << "   ";      // 3-character empty cell
+    std::cout << " . ";
 }
 else
 {
     Piece piece = pieceOnSquare[square];
-
-    std::cout << " ";        // left padding
-
-    if(piece <= WK)
-        std::cout << WHITE_PIECE << pieceSymbol[piece];
-    else
-        std::cout << BLACK_PIECE << pieceSymbol[piece];
-
-    std::cout << " ";        // right padding
+    std::cout << " " << pieceChar[piece] << " ";
 }
-
-std::cout << RESET;
         }
 
         std::cout << '\n';

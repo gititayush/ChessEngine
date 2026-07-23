@@ -39,24 +39,16 @@ void Divide(Board& board, int depth)
     MoveList list;
     MoveGenerator::Generate(board, list);
 
-    U64 total = 0;
+    int legalMoves = 0;
 
     for(int i = 0; i < list.count; i++)
     {
         Move move = list.moves[i];
 
-        if(!MoveGenerator::IsMoveLegal(board, move))
-            continue;
+        // if(!MoveGenerator::IsMoveLegal(board, move))
+        //     continue;
 
-        UndoInfo undo;
-
-        board.MakeMove(move, undo);
-
-        U64 nodes = Run(board, depth - 1);
-
-        board.UndoMove(move, undo);
-
-        total += nodes;
+        legalMoves++;
 
         std::cout
             << MoveEncoding::SquareToString(MoveEncoding::From(move))
@@ -84,12 +76,12 @@ void Divide(Board& board, int depth)
             }
         }
 
-        std::cout << " : " << nodes << '\n';
+        std::cout << '\n';
     }
 
-    std::cout << "\nTotal nodes = "
-              << total
-              << "\n";
+std::cout << "\nPseudo Legal Moves = "
+          << list.count
+          << '\n';
 }
 
 }
