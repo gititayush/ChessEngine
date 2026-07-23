@@ -1,3 +1,4 @@
+#include <iostream>
 #include "MoveGenerator.h"
 #include "AttackDetector.h"
 #include "AttackTables.h"

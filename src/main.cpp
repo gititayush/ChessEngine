@@ -1,30 +1,32 @@
-#include <windows.h>
+// 
 #include <iostream>
 
 #include "AttackTables.h"
 #include "Board.h"
-#include "Search.h"
-#include "Move.h"
-
+#include "Perft.h"
+#include "Bitboard.h"
 int main()
 {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-
     AttackTables::Initialize();
+
+    Bitboard::Print(AttackTables::knightAttacks[E5]);
 
     Board board;
 
-    board.LoadFEN(
-        "8/8/8/8/4q3/8/4Q3/4K3 w - - 0 1");
+    board.LoadFEN("r3k2r/p1ppqpb1/bn2pnp1/2pP4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 0 1");
 
     board.Print();
 
-    Move bestMove = Search::FindBestMove(board, 3);
+    // for (int depth = 1; depth <= 6; depth++)
+    // {
+    //     std::cout << "Depth "
+    //               << depth
+    //               << " : "
+    //               << Perft::Run(board, depth)
+    //               << '\n';
+    // }
 
-    std::cout << "\n\nBest Move: ";
-    MoveEncoding::Print(bestMove);
-    std::cout << '\n';
+    Perft::Divide(board, 2);
 
     return 0;
 }
